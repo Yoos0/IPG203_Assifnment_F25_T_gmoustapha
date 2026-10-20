@@ -1,0 +1,15 @@
+/home/yoos/all-tests/IPG203_F25/RepairCenter/bin/Debug/net8.0/RepairCenter
+/home/yoos/all-tests/IPG203_F25/RepairCenter/bin/Debug/net8.0/RepairCenter.deps.json
+/home/yoos/all-tests/IPG203_F25/RepairCenter/bin/Debug/net8.0/RepairCenter.runtimeconfig.json
+/home/yoos/all-tests/IPG203_F25/RepairCenter/bin/Debug/net8.0/RepairCenter.dll
+/home/yoos/all-tests/IPG203_F25/RepairCenter/bin/Debug/net8.0/RepairCenter.pdb
+/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/Debug/net8.0/RepairCenter.GeneratedMSBuildEditorConfig.editorconfig
+/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/Debug/net8.0/RepairCenter.AssemblyInfoInputs.cache
+/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/Debug/net8.0/RepairCenter.AssemblyInfo.cs
+/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/Debug/net8.0/RepairCenter.csproj.CoreCompileInputs.cache
+/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/Debug/net8.0/RepairCenter.sourcelink.json
+/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/Debug/net8.0/RepairCenter.dll
+/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/Debug/net8.0/refint/RepairCenter.dll
+/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/Debug/net8.0/RepairCenter.pdb
+/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/Debug/net8.0/RepairCenter.genruntimeconfig.cache
+/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/Debug/net8.0/ref/RepairCenter.dll
