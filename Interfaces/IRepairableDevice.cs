@@ -18,6 +18,7 @@ public interface IRepairableDevice
     // --- Repair workflow ---
     void StartRepair();
     void CompleteRepair();
+    void DeliverToCustomer();
 
     // --- Cost and reporting ---
     decimal CalculateRepairCost();
