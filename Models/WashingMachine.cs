@@ -1,9 +1,9 @@
+using RepairCenter.Helpers;
 namespace RepairCenter.Models;
 
-/// <summary>
 /// A washing machine. Cost depends on labor, parts, a leak repair fee,
 /// and a labor surcharge for front-loading models.
-/// </summary>
+
 public class WashingMachine : Appliance
 {
     private const decimal HourlyRate = 10m;
@@ -18,7 +18,7 @@ public class WashingMachine : Appliance
                           double maxLoadKg, bool isFrontLoad, bool hasWaterLeak = false)
         : base(serialNumber, ownerName, expectedDeliveryDate)
     {
-        if (maxLoadKg <= 0)
+        if (!Validator.IsPositive(maxLoadKg))
             throw new ArgumentOutOfRangeException(nameof(maxLoadKg), "Max load must be positive.");
 
         _maxLoadKg = maxLoadKg;

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "\\\\wsl.localhost\\Ubuntu\\home\\yoos\\all-tests\\IPG203_F25\\RepairCenter\\RepairCenter.csproj": {}
+    "/home/yoos/all-tests/IPG203_F25/RepairCenter/RepairCenter.csproj": {}
   },
   "projects": {
-    "\\\\wsl.localhost\\Ubuntu\\home\\yoos\\all-tests\\IPG203_F25\\RepairCenter\\RepairCenter.csproj": {
+    "/home/yoos/all-tests/IPG203_F25/RepairCenter/RepairCenter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\wsl.localhost\\Ubuntu\\home\\yoos\\all-tests\\IPG203_F25\\RepairCenter\\RepairCenter.csproj",
+        "projectUniqueName": "/home/yoos/all-tests/IPG203_F25/RepairCenter/RepairCenter.csproj",
         "projectName": "RepairCenter",
-        "projectPath": "\\\\wsl.localhost\\Ubuntu\\home\\yoos\\all-tests\\IPG203_F25\\RepairCenter\\RepairCenter.csproj",
-        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-        "outputPath": "\\\\wsl.localhost\\Ubuntu\\home\\yoos\\all-tests\\IPG203_F25\\RepairCenter\\obj\\",
+        "projectPath": "/home/yoos/all-tests/IPG203_F25/RepairCenter/RepairCenter.csproj",
+        "packagesPath": "/home/yoos/.nuget/packages/",
+        "outputPath": "/home/yoos/all-tests/IPG203_F25/RepairCenter/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/yoos/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/256/sdk/8.0.407/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

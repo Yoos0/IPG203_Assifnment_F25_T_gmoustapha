@@ -1,13 +1,13 @@
+using RepairCenter.Helpers;
 using RepairCenter.Enums;
 using RepairCenter.Events;
 using RepairCenter.Interfaces;
 
 namespace RepairCenter.Models;
 
-/// <summary>
 /// Base class for every appliance in the repair center.
 /// Holds the shared data and workflow; subclasses define how repair cost is calculated.
-/// </summary>
+
 public abstract class Appliance : IRepairableDevice
 {
     // All fields are private (Encapsulation)
@@ -19,27 +19,28 @@ public abstract class Appliance : IRepairableDevice
     private decimal _laborHours;
     private decimal _partsCost;
 
-    /// <summary>Raised every time the device's status changes.</summary>
+    /// Raised every time the device's status changes.
     public event DeviceStatusChangedHandler? StatusChanged;
 
-    protected Appliance(string serialNumber, string ownerName, DateTime expectedDeliveryDate)
-    {
-        // Temporary inline checks; replace with the static Validator class once it exists.
-        if (string.IsNullOrWhiteSpace(serialNumber))
-            throw new ArgumentException("Serial number is required.", nameof(serialNumber));
-        if (string.IsNullOrWhiteSpace(ownerName))
-            throw new ArgumentException("Owner name is required.", nameof(ownerName));
+protected Appliance(string serialNumber, string ownerName, DateTime expectedDeliveryDate)
+{
+    if (!Validator.IsValidSerialNumber(serialNumber))
+        throw new ArgumentException(
+            "Serial number must look like FR-1001 (2-3 capital letters, a dash, 4-6 digits).",
+            nameof(serialNumber));
 
-        _serialNumber = serialNumber;
-        _ownerName = ownerName;
-        _receivedDate = DateTime.Now;
+    if (!Validator.IsValidName(ownerName))
+        throw new ArgumentException("Owner name must contain at least 2 letters.", nameof(ownerName));
 
-        if (expectedDeliveryDate < _receivedDate)
-            throw new ArgumentException("Expected delivery date cannot be in the past.", nameof(expectedDeliveryDate));
+    if (!Validator.IsValidDeliveryDate(expectedDeliveryDate))
+        throw new ArgumentException("Expected delivery date cannot be in the past.", nameof(expectedDeliveryDate));
 
-        _expectedDeliveryDate = expectedDeliveryDate;
-        _status = DeviceStatus.Received;
-    }
+    _serialNumber = serialNumber;
+    _ownerName = ownerName.Trim();
+    _receivedDate = DateTime.Now;
+    _expectedDeliveryDate = expectedDeliveryDate;
+    _status = DeviceStatus.Received;
+}
 
     // --- Read-only after creation ---
     public string SerialNumber => _serialNumber;
@@ -55,25 +56,52 @@ public abstract class Appliance : IRepairableDevice
         && DateTime.Now > _expectedDeliveryDate;
 
     // --- Writable, but validated ---
-    public decimal LaborHours
-    {
-        get => _laborHours;
-        set
-        {
-            if (value < 0) throw new ArgumentOutOfRangeException(nameof(value), "Labor hours cannot be negative.");
-            _laborHours = value;
-        }
-    }
 
-    public decimal PartsCost
+
+public decimal LaborHours
+{
+    get => _laborHours;
+    set
     {
-        get => _partsCost;
-        set
-        {
-            if (value < 0) throw new ArgumentOutOfRangeException(nameof(value), "Parts cost cannot be negative.");
-            _partsCost = value;
-        }
+        if (!Validator.IsNonNegative(value))
+            throw new ArgumentOutOfRangeException(nameof(value), "Labor hours cannot be negative.");
+        _laborHours = value;
     }
+}
+
+public decimal PartsCost
+{
+    get => _partsCost;
+    set
+    {
+        if (!Validator.IsNonNegative(value))
+            throw new ArgumentOutOfRangeException(nameof(value), "Parts cost cannot be negative.");
+        _partsCost = value;
+    }
+}
+
+
+
+    // public decimal LaborHours
+    // {
+    //     get => _laborHours;
+    //     set
+    //     {
+    //         if (!Validator.IsNonNegative(value))
+    //         throw new ArgumentOutOfRangeException(nameof(value), "Labor hours cannot be negative.");
+
+    //     }
+    // }
+
+    // public decimal PartsCost
+    // {
+    //     get => _partsCost;
+    //     set
+    //     {
+    //         if (!Validator.IsNonNegative(value))
+    //         throw new ArgumentOutOfRangeException(nameof(value), "Parts cost cannot be negative.");
+    //     }
+    // }
 
     // --- Repair workflow ---
     public void StartRepair()

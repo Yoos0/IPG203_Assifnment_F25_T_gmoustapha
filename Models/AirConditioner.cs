@@ -1,9 +1,6 @@
-namespace RepairCenter.Models;
+using RepairCenter.Helpers;
 
-/// <summary>
-/// An air conditioner. Cost depends on labor, parts (more expensive for inverter models),
-/// an optional gas refill, and a fee for high-capacity units.
-/// </summary>
+namespace RepairCenter.Models;
 public class AirConditioner : Appliance
 {
     private const decimal HourlyRate = 20m;
@@ -20,8 +17,9 @@ public class AirConditioner : Appliance
                           int coolingCapacityBtu, bool isInverter, bool requiresGasRefill = false)
         : base(serialNumber, ownerName, expectedDeliveryDate)
     {
-        if (coolingCapacityBtu <= 0)
-            throw new ArgumentOutOfRangeException(nameof(coolingCapacityBtu), "Cooling capacity must be positive.");
+        if (!Validator.IsPositive(coolingCapacityBtu))
+        throw new ArgumentOutOfRangeException(nameof(coolingCapacityBtu), "Cooling capacity must be positive.");
+        
 
         _coolingCapacityBtu = coolingCapacityBtu;
         _isInverter = isInverter;

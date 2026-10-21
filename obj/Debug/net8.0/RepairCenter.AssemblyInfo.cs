@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RepairCenter")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7f617bdb7f2a261166960fdb74992c0699ab6a3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+598252043b01b79240cec1b91d448f431f13d710")]
 [assembly: System.Reflection.AssemblyProductAttribute("RepairCenter")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RepairCenter")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

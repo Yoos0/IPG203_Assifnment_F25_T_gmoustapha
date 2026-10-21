@@ -1,9 +1,8 @@
+using RepairCenter.Helpers;
 namespace RepairCenter.Models;
-
-/// <summary>
 /// A refrigerator. Cost depends on labor, parts, an optional gas refill,
 /// and a handling surcharge for large units.
-/// </summary>
+
 public class Refrigerator : Appliance
 {
     private const decimal HourlyRate = 15m;
@@ -18,14 +17,14 @@ public class Refrigerator : Appliance
                         int capacityLiters, bool requiresGasRefill = false)
         : base(serialNumber, ownerName, expectedDeliveryDate)
     {
-        if (capacityLiters <= 0)
+        if (!Validator.IsPositive(capacityLiters))
             throw new ArgumentOutOfRangeException(nameof(capacityLiters), "Capacity must be positive.");
 
         _capacityLiters = capacityLiters;
         _requiresGasRefill = requiresGasRefill;
     }
 
-    /// <summary>Fixed at creation; the physical unit does not change.</summary>
+    /// Fixed at creation; the physical unit does not change
     public int CapacityLiters => _capacityLiters;
 
     public bool RequiresGasRefill
