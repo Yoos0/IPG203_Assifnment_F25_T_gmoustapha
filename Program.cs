@@ -64,6 +64,10 @@ Section("4. Overdue check");
 // ---------------------------------------------------------------
 // منضيف جهاز موعده اليوم ومنصلحه، بس منضل نعتبره متأخر لسا ما تسلّم لصاحبه.
 manager.AddDevice(new WashingMachine("WM-2003", "Sara", DateTime.Today, 7, false));
+var repairedButLate = new Refrigerator("FR-1003", "Mona", DateTime.Today, 400);
+manager.AddDevice(repairedButLate);
+repairedButLate.StartRepair();
+repairedButLate.CompleteRepair();
 manager.CheckOverdueDevices();
 
 // ---------------------------------------------------------------

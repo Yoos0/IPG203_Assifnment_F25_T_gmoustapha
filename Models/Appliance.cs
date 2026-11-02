@@ -21,25 +21,25 @@ public abstract class Appliance : IRepairableDevice
     // منطلقين هالحدث كل ما تتغير حالة الجهاز.
     public event DeviceStatusChangedHandler? StatusChanged;
 
-protected Appliance(string serialNumber, string ownerName, DateTime expectedDeliveryDate)
-{
-    if (!Validator.IsValidSerialNumber(serialNumber))
-        throw new ArgumentException(
-            "Serial number must look like FR-1001 (2-3 capital letters, a dash, 4-6 digits).",
-            nameof(serialNumber));
+    protected Appliance(string serialNumber, string ownerName, DateTime expectedDeliveryDate)
+    {
+        if (!Validator.IsValidSerialNumber(serialNumber))
+            throw new ArgumentException(
+                "Serial number must look like FR-1001 (2-3 capital letters, a dash, 4-6 digits).",
+                nameof(serialNumber));
 
-    if (!Validator.IsValidName(ownerName))
-        throw new ArgumentException("Owner name must contain at least 2 letters.", nameof(ownerName));
+        if (!Validator.IsValidName(ownerName))
+            throw new ArgumentException("Owner name must contain at least 2 letters.", nameof(ownerName));
 
-    if (!Validator.IsValidDeliveryDate(expectedDeliveryDate))
-        throw new ArgumentException("Expected delivery date cannot be in the past.", nameof(expectedDeliveryDate));
+        if (!Validator.IsValidDeliveryDate(expectedDeliveryDate))
+            throw new ArgumentException("Expected delivery date cannot be in the past.", nameof(expectedDeliveryDate));
 
-    _serialNumber = serialNumber;
-    _ownerName = ownerName.Trim();
-    _receivedDate = DateTime.Now;
-    _expectedDeliveryDate = expectedDeliveryDate;
-    _status = DeviceStatus.Received;
-}
+        _serialNumber = serialNumber;
+        _ownerName = ownerName.Trim();
+        _receivedDate = DateTime.Now;
+        _expectedDeliveryDate = expectedDeliveryDate;
+        _status = DeviceStatus.Received;
+    }
 
     // هالقيم ثابتة بعد ما ننشئ الجهاز.
     public string SerialNumber => _serialNumber;
@@ -51,31 +51,30 @@ protected Appliance(string serialNumber, string ownerName, DateTime expectedDeli
     public DeviceStatus Status => _status;
 
     public bool IsOverdue =>
-        (_status == DeviceStatus.Received || _status == DeviceStatus.UnderRepair)
-        && DateTime.Now > _expectedDeliveryDate;
+        _status != DeviceStatus.Delivered && DateTime.Now > _expectedDeliveryDate;
 
     // منتحقق من القيم قبل ما نخزنها حتى ما تدخل بيانات غلط.
-public decimal LaborHours
-{
-    get => _laborHours;
-    set
+    public decimal LaborHours
     {
-        if (!Validator.IsNonNegative(value))
-            throw new ArgumentOutOfRangeException(nameof(value), "Labor hours cannot be negative.");
-        _laborHours = value;
+        get => _laborHours;
+        set
+        {
+            if (!Validator.IsNonNegative(value))
+                throw new ArgumentOutOfRangeException(nameof(value), "Labor hours cannot be negative.");
+            _laborHours = value;
+        }
     }
-}
 
-public decimal PartsCost
-{
-    get => _partsCost;
-    set
+    public decimal PartsCost
     {
-        if (!Validator.IsNonNegative(value))
-            throw new ArgumentOutOfRangeException(nameof(value), "Parts cost cannot be negative.");
-        _partsCost = value;
+        get => _partsCost;
+        set
+        {
+            if (!Validator.IsNonNegative(value))
+                throw new ArgumentOutOfRangeException(nameof(value), "Parts cost cannot be negative.");
+            _partsCost = value;
+        }
     }
-}
 
     // منسمح بكل خطوة بس إذا الجهاز بالحالة المناسبة.
     public void StartRepair()
@@ -106,7 +105,6 @@ public decimal PartsCost
         $"[{GetType().Name}] Serial: {_serialNumber} | Owner: {_ownerName} | " +
         $"Status: {_status} | Cost: {CalculateRepairCost():C}";
 
-    // --- Event raising ---
     private void ChangeStatus(DeviceStatus newStatus)
     {
         DeviceStatus oldStatus = _status;

@@ -20,8 +20,8 @@ public class AirConditioner : Appliance
         : base(serialNumber, ownerName, expectedDeliveryDate)
     {
         if (!Validator.IsPositive(coolingCapacityBtu))
-        throw new ArgumentOutOfRangeException(nameof(coolingCapacityBtu), "Cooling capacity must be positive.");
-        
+            throw new ArgumentOutOfRangeException(nameof(coolingCapacityBtu), "Cooling capacity must be positive.");
+
         _coolingCapacityBtu = coolingCapacityBtu;
         _isInverter = isInverter;
         _requiresGasRefill = requiresGasRefill;

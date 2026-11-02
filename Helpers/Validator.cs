@@ -18,15 +18,23 @@ public static class Validator
             return false;
 
         string trimmed = name.Trim();
-        return trimmed.Length >= 2 &&
-               trimmed.All(c => char.IsLetter(c) || c == ' ' || c == '-' || c == '\'');
+        if (trimmed.Length < 2)
+            return false;
+
+        foreach (char character in trimmed)
+        {
+            if (!char.IsLetter(character) && character != ' ' && character != '-' && character != '\'')
+                return false;
+        }
+
+        return true;
     }
 
     /// تاريخ التسليم لازم يكون اليوم أو لقدام.
     public static bool IsValidDeliveryDate(DateTime date) =>
         date.Date >= DateTime.Today;
 
-    public static bool IsPositive(double value) => value > 0;
+    public static bool IsPositive(double value) => double.IsFinite(value) && value > 0;
 
     public static bool IsNonNegative(decimal value) => value >= 0;
 }
