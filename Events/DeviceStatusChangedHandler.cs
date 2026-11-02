@@ -1,6 +1,4 @@
 namespace RepairCenter.Events;
 
-/// <summary>
-/// Delegate used to notify subscribers that a device's status changed.
-/// </summary>
+/// هاد المفوض بيحدد شكل الدوال اللي بتتعامل مع تغيير الحالة.
 public delegate void DeviceStatusChangedHandler(object sender, DeviceStatusChangedEventArgs e);

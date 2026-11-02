@@ -1,9 +1,8 @@
 using RepairCenter.Helpers;
+
 namespace RepairCenter.Models;
 
-/// A washing machine. Cost depends on labor, parts, a leak repair fee,
-/// and a labor surcharge for front-loading models.
-
+// الغسالة بتضيف تكلفة التسريب، وموديل التحميل الأمامي إله أجرة أعلى.
 public class WashingMachine : Appliance
 {
     private const decimal HourlyRate = 10m;
@@ -37,6 +36,7 @@ public class WashingMachine : Appliance
 
     public override decimal CalculateRepairCost()
     {
+        // منحسب أجرة الشغل، وبعدها منضيف تكلفة التسريب إذا موجود.
         decimal labor = LaborHours * HourlyRate;
 
         if (_isFrontLoad)

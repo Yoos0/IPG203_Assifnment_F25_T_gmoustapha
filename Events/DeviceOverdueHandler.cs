@@ -2,7 +2,5 @@ using RepairCenter.Models;
 
 namespace RepairCenter.Events;
 
-/// <summary>
-/// Delegate used to notify subscribers that a device missed its expected delivery date.
-/// </summary>
+///هاد المفوض بيحدد شكل الدالة اللي بتستقبل تنبيه التأخير.
 public delegate void DeviceOverdueHandler(Appliance device);

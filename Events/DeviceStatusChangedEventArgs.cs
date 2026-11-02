@@ -2,9 +2,7 @@ using RepairCenter.Enums;
 
 namespace RepairCenter.Events;
 
-/// <summary>
-/// Carries the details of a status change (which device, from what, to what).
-/// </summary>
+/// بيحمل معلومات الحالة القديمة والجديدة للجهاز.
 public class DeviceStatusChangedEventArgs : EventArgs
 {
     public string SerialNumber { get; }

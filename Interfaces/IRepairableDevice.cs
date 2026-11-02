@@ -2,12 +2,10 @@ using RepairCenter.Enums;
 
 namespace RepairCenter.Interfaces;
 
-/// <summary>
-/// Operations shared by every appliance handled by the repair center.
-/// </summary>
+/// هاد العقد بيحدد الشغلات المشتركة بين كل الأجهزة.
 public interface IRepairableDevice
 {
-    // --- Identity and state (read-only from the outside) ---
+    // المعلومات بتنقرا من برا، بس تغيير الحالة بيصير عبر دوال سير العمل.
     string SerialNumber { get; }
     string OwnerName { get; }
     DeviceStatus Status { get; }
@@ -15,12 +13,12 @@ public interface IRepairableDevice
     DateTime ExpectedDeliveryDate { get; }
     bool IsOverdue { get; }
 
-    // --- Repair workflow ---
+    // خطوات الإصلاح والتسليم المشتركة بين الأجهزة.
     void StartRepair();
     void CompleteRepair();
     void DeliverToCustomer();
 
-    // --- Cost and reporting ---
+    // كل نوع بيحسب تكلفته وبيعرض ملخصه.
     decimal CalculateRepairCost();
     string GetSummary();
 }

@@ -3,12 +3,12 @@ using RepairCenter.Enums;
 using RepairCenter.Models;
 using RepairCenter.Services;
 
-// Consistent currency formatting regardless of the machine's regional settings
+// منثبت تنسيق العملة حتى يطلع نفس الشي على كل الأجهزة.
 CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
 var manager = new RepairCenterManager();
 
-// Subscribe to the manager's overdue event
+// منربط الحدث بدالة بتخبرنا مين تأخر.
 manager.DeviceOverdue += d =>
     Console.WriteLine($"[Overdue] {d.SerialNumber} ({d.OwnerName}) missed its delivery date!");
 
@@ -28,7 +28,7 @@ foreach (Appliance device in new Appliance[] { fridge, washer, ac })
     manager.AddDevice(device);
 }
 
-// A second subscriber on a single device: notify the customer when it is repaired
+// منضيف مشترك تاني ليخبر صاحب الجهاز وقت يخلص إصلاحه.
 fridge.StatusChanged += (sender, e) =>
 {
     if (e.NewStatus == DeviceStatus.Repaired && sender is Appliance device)
@@ -62,7 +62,7 @@ ExpectRejected("Duplicate serial number", () => manager.AddDevice(new Refrigerat
 // ---------------------------------------------------------------
 Section("4. Overdue check");
 // ---------------------------------------------------------------
-// A delivery date of today is valid, but midnight has already passed, so it counts as late.
+// منضيف جهاز موعده اليوم ومنصلحه، بس منضل نعتبره متأخر لسا ما تسلّم لصاحبه.
 manager.AddDevice(new WashingMachine("WM-2003", "Sara", DateTime.Today, 7, false));
 manager.CheckOverdueDevices();
 
@@ -76,7 +76,7 @@ Console.WriteLine($"Repaired devices (static): {RepairCenterManager.RepairedDevi
 Console.WriteLine($"Repaired revenue (static): {RepairCenterManager.TotalRepairedRevenue:C}");
 
 // ---------------------------------------------------------------
-// Helpers
+// دوال مساعدة لطباعة العناوين وتجربة الحالات المرفوضة.
 // ---------------------------------------------------------------
 static void Section(string title) =>
     Console.WriteLine($"\n=== {title} ===");

@@ -1,8 +1,8 @@
 using RepairCenter.Helpers;
-namespace RepairCenter.Models;
-/// A refrigerator. Cost depends on labor, parts, an optional gas refill,
-/// and a handling surcharge for large units.
 
+namespace RepairCenter.Models;
+
+// البراد تكلفته بتتغير حسب الغاز وحجمه.
 public class Refrigerator : Appliance
 {
     private const decimal HourlyRate = 15m;
@@ -24,7 +24,7 @@ public class Refrigerator : Appliance
         _requiresGasRefill = requiresGasRefill;
     }
 
-    /// Fixed at creation; the physical unit does not change
+    // سعة البراد ثابتة وما بتتغير بعد إنشاء الجهاز.
     public int CapacityLiters => _capacityLiters;
 
     public bool RequiresGasRefill
@@ -35,6 +35,7 @@ public class Refrigerator : Appliance
 
     public override decimal CalculateRepairCost()
     {
+        // منضيف أجرة الغاز ورسم الحجم الكبير إذا كانوا مطلوبين.
         decimal cost = LaborHours * HourlyRate + PartsCost;
 
         if (_requiresGasRefill)

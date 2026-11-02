@@ -1,6 +1,8 @@
 using RepairCenter.Helpers;
 
 namespace RepairCenter.Models;
+
+// المكيف إله أجور وقطع إضافية حسب الإنفرتر والتبريد والغاز.
 public class AirConditioner : Appliance
 {
     private const decimal HourlyRate = 20m;
@@ -20,7 +22,6 @@ public class AirConditioner : Appliance
         if (!Validator.IsPositive(coolingCapacityBtu))
         throw new ArgumentOutOfRangeException(nameof(coolingCapacityBtu), "Cooling capacity must be positive.");
         
-
         _coolingCapacityBtu = coolingCapacityBtu;
         _isInverter = isInverter;
         _requiresGasRefill = requiresGasRefill;
@@ -37,6 +38,7 @@ public class AirConditioner : Appliance
 
     public override decimal CalculateRepairCost()
     {
+        // كل ميزة بالمكيف ممكن تضيف تكلفة مختلفة.
         decimal parts = _isInverter ? PartsCost * InverterPartsMultiplier : PartsCost;
         decimal cost = LaborHours * HourlyRate + parts;
 
